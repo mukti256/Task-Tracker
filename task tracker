@@ -1,0 +1,42 @@
+// Select elements
+const taskInput = document.getElementById('task-input');
+const addTaskButton = document.getElementById('add-task');
+const taskList = document.getElementById('task-list');
+
+// Add task event listener
+addTaskButton.addEventListener('click', () => {
+  const taskText = taskInput.value.trim();
+
+  if (taskText === '') {
+    alert('Please enter a task!');
+    return;
+  }
+
+  // Create list item
+  const listItem = document.createElement('li');
+  const taskSpan = document.createElement('span');
+  taskSpan.textContent = taskText;
+
+  // Add complete functionality
+  taskSpan.addEventListener('click', () => {
+    taskSpan.classList.toggle('task-complete');
+  });
+
+  // Add delete button
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete';
+  deleteButton.className = 'delete-btn';
+
+  deleteButton.addEventListener('click', () => {
+    taskList.removeChild(listItem);
+  });
+
+  listItem.appendChild(taskSpan);
+  listItem.appendChild(deleteButton);
+
+  // Add to task list
+  taskList.appendChild(listItem);
+
+  // Clear input
+  taskInput.value = '';
+});
